@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>120.三角形最小路径和</title>
+      <link href="/2020/03/07/120.%20%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/"/>
+      <url>/2020/03/07/120.%20%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</url>
+      
+        <content type="html"><![CDATA[<p>给定一个三角形，找出自顶向下的最小路径和。每一步只能移动到下一行中相邻的结点上。</p><p>例如，给定三角形：</p><blockquote><p>[<br>[2],<br>[3,4],<br>[6,5,7],<br>[4,1,8,3]<br>]</p></blockquote><p>自顶向下的最小路径和为 11（即，2 + 3 + 5 + 1 = 11）。<br><strong>说明</strong>：</p><p>如果你可以只使用 O(n) 的额外空间（n 为三角形的总行数）来解决这个问题，那么你的算法会很加分。</p><p><strong>题解</strong>：</p><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">java</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">minimumTotal</span><span class="params">(List&lt;List&lt;Integer&gt;&gt; triangle)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = triangle.size();</span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line"></span><br><span class="line">        List&lt;Integer&gt; row = triangle.get(n-<span class="number">1</span>);<span class="comment">//获取最后一行的数据存入dp数组中</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;row.size();i++)&#123;</span><br><span class="line">            dp[i]=row.get(i);</span><br><span class="line">        &#125;       </span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=n-<span class="number">2</span>;i&gt;=<span class="number">0</span>;i--)&#123;<span class="comment">//从倒数第二行开始</span></span><br><span class="line">            List&lt;Integer&gt; currentRow = triangle.get(i);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=i;j++)&#123;<span class="comment">//dp值刷新为当前值加上下一行相邻数据之间的最小值</span></span><br><span class="line">                dp[j]=currentRow.get(j)+Math.min(dp[j],dp[j+<span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">0</span>];<span class="comment">//此时dp[0]即为最小路径和</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>剑指offer-相交链表</title>
       <link href="/2020/02/28/LeetCode160-%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/"/>
       <url>/2020/02/28/LeetCode160-%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/</url>
