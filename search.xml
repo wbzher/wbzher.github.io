@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>面试题49. 丑数</title>
+      <link href="/2020/03/12/%E9%9D%A2%E8%AF%95%E9%A2%9849-%E4%B8%91%E6%95%B0/"/>
+      <url>/2020/03/12/%E9%9D%A2%E8%AF%95%E9%A2%9849-%E4%B8%91%E6%95%B0/</url>
+      
+        <content type="html"><![CDATA[<h1 id="面试题49-丑数"><a class="markdownIt-Anchor" href="#面试题49-丑数"></a> <a href="https://leetcode-cn.com/problems/chou-shu-lcof/" target="_blank" rel="noopener">面试题49. 丑数</a></h1><p>我们把只包含因子 2、3 和 5 的数称作丑数（Ugly Number）。求按从小到大的顺序的第 n 个丑数。</p><p></p><p><strong>示例:</strong></p><blockquote><p>输入: n = 10<br>输出: 12<br>解释: 1, 2, 3, 4, 5, 6, 8, 9, 10, 12 是前 10 个丑数。</p></blockquote><p><strong>说明:</strong></p><ol><li>1 是丑数。</li><li>n 不超过1690。</li></ol><p><strong>题解：动态规划+三指针:</strong></p><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">java</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">nthUglyNumber</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] dp = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        dp[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> i2=<span class="number">0</span>,i3=<span class="number">0</span>,i5=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)&#123;</span><br><span class="line">            <span class="keyword">int</span> min = Math.min(dp[i2]*<span class="number">2</span>,Math.min(dp[i3]*<span class="number">3</span>,dp[i5]*<span class="number">5</span>));</span><br><span class="line">            <span class="keyword">if</span>(min==dp[i2]*<span class="number">2</span>) i2++;</span><br><span class="line">            <span class="keyword">if</span>(min==dp[i3]*<span class="number">3</span>) i3++;</span><br><span class="line">            <span class="keyword">if</span>(min==dp[i5]*<span class="number">5</span>) i5++;</span><br><span class="line">            dp[i]=min;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[n-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+          <category> 剑指offer </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> 剑指offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>面试题56 - II. 数组中数字出现的次数 II</title>
       <link href="/2020/03/11/%E9%9D%A2%E8%AF%95%E9%A2%9856-II-%E6%95%B0%E7%BB%84%E4%B8%AD%E6%95%B0%E5%AD%97%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0-II/"/>
       <url>/2020/03/11/%E9%9D%A2%E8%AF%95%E9%A2%9856-II-%E6%95%B0%E7%BB%84%E4%B8%AD%E6%95%B0%E5%AD%97%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0-II/</url>
