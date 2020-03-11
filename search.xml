@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>面试题56 - II. 数组中数字出现的次数 II</title>
+      <link href="/2020/03/11/%E9%9D%A2%E8%AF%95%E9%A2%9856-II-%E6%95%B0%E7%BB%84%E4%B8%AD%E6%95%B0%E5%AD%97%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0-II/"/>
+      <url>/2020/03/11/%E9%9D%A2%E8%AF%95%E9%A2%9856-II-%E6%95%B0%E7%BB%84%E4%B8%AD%E6%95%B0%E5%AD%97%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0-II/</url>
+      
+        <content type="html"><![CDATA[<h1 id="面试题56-ii-数组中数字出现的次数-ii"><a class="markdownIt-Anchor" href="#面试题56-ii-数组中数字出现的次数-ii"></a> <a href="https://leetcode-cn.com/problems/shu-zu-zhong-shu-zi-chu-xian-de-ci-shu-ii-lcof/" target="_blank" rel="noopener">面试题56 - II. 数组中数字出现的次数 II</a></h1><p>在一个数组 nums 中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。</p><p></p><p><strong>示例 1：</strong></p><blockquote><p>输入：nums = [3,4,3,3]<br>输出：4</p></blockquote><p><strong>示例 2：</strong></p><blockquote><p>输入：nums = [9,1,7,9,7,9,7]<br>输出：1</p></blockquote><p><strong>限制：</strong></p><blockquote><p>1 &lt;= nums.length &lt;= 10000<br>1 &lt;= nums[i] &lt; 2^31</p></blockquote><h2 id="题解1模拟三进制"><a class="markdownIt-Anchor" href="#题解1模拟三进制"></a> 题解1–模拟三进制：</h2><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">java</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">32</span>;i++)&#123;<span class="comment">//每一位</span></span><br><span class="line">            <span class="keyword">int</span> count=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> n:nums)&#123;<span class="comment">//每一个数字</span></span><br><span class="line">                <span class="keyword">if</span>(((<span class="number">1</span>&lt;&lt;i)&amp;n)!=<span class="number">0</span>)<span class="comment">//判断条件是！=0而不是==1的原因：例如结果为100，其实是4</span></span><br><span class="line">                    count++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>((count%<span class="number">3</span>)==<span class="number">1</span>)<span class="comment">//因为别的数字都是成三出现的，所以模3落单的就是我们想要的</span></span><br><span class="line">                ans+=(<span class="number">1</span>&lt;&lt;i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><h2 id="题解2状态机"><a class="markdownIt-Anchor" href="#题解2状态机"></a> 题解2–状态机：</h2><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">java</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">singleNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> a=<span class="number">0</span>,b=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> c : nums) &#123;</span><br><span class="line">            b = b ^ c &amp; ~ a;</span><br><span class="line">            a = a ^ c &amp; ~ b;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> b;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+          <category> 剑指offer </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> 剑指offer </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>面试题59 - I. 滑动窗口的最大值</title>
       <link href="/2020/03/07/%E9%9D%A2%E8%AF%95%E9%A2%9859-I-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC/"/>
       <url>/2020/03/07/%E9%9D%A2%E8%AF%95%E9%A2%9859-I-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC/</url>
